@@ -1,7 +1,7 @@
 {
-  "name": "easy-peasy-bot",
+  "name": "hba queue bot",
   "version": "1.0.0",
-  "description": "The awesomest bot evar.",
+  "description": "Slackbot which maintains and manages a queue. Built for Hackbright Academy.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,18 +9,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DEGoodmanWilson/easy-peasy-bot-app.git"
+    "url": "https://github.com/finasilvasantiste/queue_slackbot"
   },
   "keywords": [
     "slack",
     "bot"
   ],
-  "author": "D.E. Goodman-Wilson",
+  "author": "D.E. Goodman-Wilson, forked and customized by Fina Silva-Santisteban.",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DEGoodmanWilson/easy-peasy-bot-app/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/DEGoodmanWilson/easy-peasy-bot-app#readme",
+  "homepage": "https://github.com/finasilvasantiste/queue_slackbot",
   "engines": {
     "node": "5.1.1"
   },
