@@ -98,10 +98,34 @@ controller.on('direct_mention', function (bot, message) {
     var request = messageText[0]
     var userName = messageText[1]
 
-    if (request == actions[0]){
-        queue.push(userName)
-        bot.reply(message, "Adding " + userName +" to the queue!")
+    // if (request == actions[0]){
+    //     queue.push(userName)
+    //     bot.reply(message, "Adding " + userName +" to the queue!")
+    // }
+    switch(request) {
+        case actions[0]: // Add user to queue.
+            queue.push(userName)
+            bot.reply(message, "Adding " + userName +" to the queue!")
+            break;
+        case actions[1]: // Show queue.
+            bot.reply(message, "This is how the queue looks like at the moment:")
+            if (queue.length == 0){
+                bot.reply(message, "It's empty!")
+            }else {
+                for (var i =0; i<= queue.length-1; i++){
+                bot.reply(message, queue[i])
+                }
+            }
+            break;
+        case actions[2]: // Pop queue.
+            var user = queue[0]
+            queue.pop()
+            bot.reply(message, "Hey " + user + ", help is on the way!")
+            break;
     }
+
+
+
     // bot.reply(message, "I'm here!")
 });
 
