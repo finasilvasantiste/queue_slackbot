@@ -1,5 +1,5 @@
 {
-  "name": "hba queue bot",
+  "name": "queuey",
   "version": "1.0.0",
   "description": "Slackbot which maintains and manages a queue. Built for Hackbright Academy.",
   "main": "index.js",
