@@ -89,6 +89,21 @@ controller.hears('hello', 'direct_message', function (bot, message) {
     bot.reply(message, 'Hello!');
 });
 
+actions = ["add", "show", "pop"]
+queue = []
+is_queue_open = false 
+
+controller.on('direct_mention', function (bot, message) {
+    var messageText = message.text.split(" ")
+    var request = messageText[0]
+    var userName = messageText[1]
+
+    if (request == actions[0]){
+        queue.push(userName)
+        bot.reply(message, "Adding " + userName +" to the queue!")
+    }
+    // bot.reply(message, "I'm here!")
+});
 
 /**
  * AN example of what could be:
