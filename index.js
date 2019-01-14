@@ -89,22 +89,22 @@ controller.hears('hello', 'direct_message', function (bot, message) {
     bot.reply(message, 'Hello!');
 });
 
-actions = ["add", "show", "pop"]
+actions = ["add", "show", "pop", "help", "open", "close"]
 queue = []
-is_queue_open = false 
+isQueueOpen = false 
 
 controller.on('direct_mention', function (bot, message) {
     var messageText = message.text.split(" ")
     var request = messageText[0]
     var userName = messageText[1]
+    var location = messageText[2]
+    var users = []
+    var isValidRequest = false
 
-    // if (request == actions[0]){
-    //     queue.push(userName)
-    //     bot.reply(message, "Adding " + userName +" to the queue!")
-    // }
+
     switch(request) {
         case actions[0]: // Add user to queue.
-            queue.push(userName)
+            queue.push([userName, location])
             bot.reply(message, "Adding " + userName +" to the queue!")
 
             bot.api.reactions.add({
@@ -122,18 +122,11 @@ controller.on('direct_mention', function (bot, message) {
             if (queue.length == 0){
                 bot.reply(message, "It's empty! :woman-shrugging: ")
 
-                bot.api.reactions.add({
-                 timestamp: message.ts,
-                 channel: message.channel,
-                 name: 'woman-shrugging',
-                }, function (err) {
-                    if (err) {
-                        console.log(err)
-                    }
-                })
             }else {
                 for (var i =0; i<= queue.length-1; i++){
-                bot.reply(message, queue[i])
+                var nameInQueue = queue[i][0,0]
+                var locInQueue = queue[i][0,1]
+                bot.reply(message, nameInQueue + " in " + locInQueue)
                 }
 
                 bot.api.reactions.add({
@@ -151,13 +144,16 @@ controller.on('direct_mention', function (bot, message) {
             if (queue.length == 0){
                 bot.reply(message, "Queue's empty! Nothing to pop! :woman-shrugging: ")
             }else{
-                var user = queue[0]
+                var nameInQueue = queue[0][0]
+                var locInQueue = queue[0][1]
                 queue.pop()
-                bot.reply(message, "Hey " + user + ", help is on the way! :ambulance: ")
+                bot.reply(message, "Hey " + nameInQueue + " in " + locInQueue + ", help is on the way! :ambulance: ")
             }
 
             break;
-    }
+}
+
+
 
     // bot.reply(message, "I'm here!")
 });
