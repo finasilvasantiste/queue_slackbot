@@ -106,25 +106,58 @@ controller.on('direct_mention', function (bot, message) {
         case actions[0]: // Add user to queue.
             queue.push(userName)
             bot.reply(message, "Adding " + userName +" to the queue!")
+
+            bot.api.reactions.add({
+                 timestamp: message.ts,
+                 channel: message.channel,
+                 name: 'heavy_check_mark',
+                }, function (err) {
+                    if (err) {
+                        console.log(err)
+                    }
+                })
             break;
         case actions[1]: // Show queue.
             bot.reply(message, "This is how the queue looks like at the moment:")
             if (queue.length == 0){
-                bot.reply(message, "It's empty!")
+                bot.reply(message, "It's empty! :woman-shrugging: ")
+
+                bot.api.reactions.add({
+                 timestamp: message.ts,
+                 channel: message.channel,
+                 name: 'woman-shrugging',
+                }, function (err) {
+                    if (err) {
+                        console.log(err)
+                    }
+                })
             }else {
                 for (var i =0; i<= queue.length-1; i++){
                 bot.reply(message, queue[i])
                 }
+
+                bot.api.reactions.add({
+                 timestamp: message.ts,
+                 channel: message.channel,
+                 name: 'eyes',
+                }, function (err) {
+                    if (err) {
+                        console.log(err)
+                    }
+                })
             }
             break;
         case actions[2]: // Pop queue.
-            var user = queue[0]
-            queue.pop()
-            bot.reply(message, "Hey " + user + ", help is on the way!")
+            if (queue.length == 0){
+                bot.reply(message, "Queue's empty! Nothing to pop! :woman-shrugging: ")
+            }else{
+                var user = queue[0]
+                queue.pop()
+                bot.reply(message, "Hey " + user + ", help is on the way! :ambulance: ")
+            }
+
             break;
     }
-
-
 
     // bot.reply(message, "I'm here!")
 });
