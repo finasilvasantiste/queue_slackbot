@@ -126,7 +126,8 @@ controller.on('direct_mention', function (bot, message) {
                 for (var i =0; i<= queue.length-1; i++){
                 var nameInQueue = queue[i][0,0]
                 var locInQueue = queue[i][0,1]
-                bot.reply(message, nameInQueue + " in " + locInQueue)
+                var position = i+1
+                bot.reply(message, position +". " + nameInQueue + " in " + locInQueue)
                 }
 
                 bot.api.reactions.add({
@@ -146,11 +147,25 @@ controller.on('direct_mention', function (bot, message) {
             }else{
                 var nameInQueue = queue[0][0]
                 var locInQueue = queue[0][1]
-                queue.pop()
+                queue.shift()
                 bot.reply(message, "Hey " + nameInQueue + " in " + locInQueue + ", help is on the way! :ambulance: ")
+
             }
 
             break;
+        case actions[3]: // Show help info (how to use bot).
+            bot.reply(message, "Please use this syntax to add yourself to the queue: ```@queuey add your_name your_location```")
+
+            bot.api.reactions.add({
+             timestamp: message.ts,
+             channel: message.channel,
+             name: 'bulb',
+            }, function (err) {
+                if (err) {
+                    console.log(err)
+                }
+            })
+        // To do: close and open queue actions.
 }
 
 
