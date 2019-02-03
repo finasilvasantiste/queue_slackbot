@@ -1,4 +1,4 @@
-My changes can be found in index.js and package.json.
+You can find the bot logic that I've added in index.js .
 
 Forked from easy-peasy-bot:
 # easy-peasy-bot
