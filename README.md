@@ -1,3 +1,6 @@
+My changes can be found in index.js and package.json.
+
+Forked from easy-peasy-bot:
 # easy-peasy-bot
 
 ## The story of a (Slack)bot
